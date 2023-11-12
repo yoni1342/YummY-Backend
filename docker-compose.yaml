@@ -1,0 +1,27 @@
+version: "3.6"
+services:
+  postgres:
+    image: postgres:15
+    # restart: always
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgrespassword
+
+  graphql-engine:
+    image: hasura/graphql-engine:v2.33.0
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./.env
+  go:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - 8082:8082
+    env_file:
+      - ./.env
+
+volumes:
+  db_data:
