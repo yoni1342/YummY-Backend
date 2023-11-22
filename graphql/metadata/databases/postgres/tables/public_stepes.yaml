@@ -1,0 +1,54 @@
+table:
+  name: stepes
+  schema: public
+object_relationships:
+  - name: recipe
+    using:
+      foreign_key_constraint_on: recipe_id
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+        - id
+        - order
+        - recipe_id
+        - step_description
+    comment: ""
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - id
+        - order
+        - recipe_id
+        - step_description
+      filter: {}
+    comment: ""
+  - role: user
+    permission:
+      columns:
+        - id
+        - order
+        - recipe_id
+        - step_description
+      filter: {}
+    comment: ""
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - order
+        - step_description
+      filter: {}
+      check: null
+    comment: ""
+delete_permissions:
+  - role: user
+    permission:
+      filter:
+        recipe:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
+    comment: ""

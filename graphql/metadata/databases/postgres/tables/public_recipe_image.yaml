@@ -1,0 +1,34 @@
+table:
+  name: recipe_image
+  schema: public
+object_relationships:
+  - name: recipe
+    using:
+      foreign_key_constraint_on: recipe_id
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+        - id
+        - image
+        - recipe_id
+    comment: ""
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - image
+        - id
+        - recipe_id
+      filter: {}
+      allow_aggregations: true
+    comment: ""
+  - role: user
+    permission:
+      columns:
+        - id
+        - image
+        - recipe_id
+      filter: {}
+    comment: ""

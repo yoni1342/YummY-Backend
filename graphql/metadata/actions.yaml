@@ -1,6 +1,55 @@
-actions: []
+actions:
+  - name: signIn
+    definition:
+      kind: synchronous
+      handler: http://localhost:8082/auth/signin
+      request_transform:
+        body:
+          action: transform
+          template: |-
+            {
+              "email":{{$body.input.credential.email}},
+              "password":{{$body.input.credential.password}}
+            }
+        template_engine: Kriti
+        version: 2
+    permissions:
+      - role: anonymous
+  - name: signup
+    definition:
+      kind: synchronous
+      handler: http://localhost:8082/auth/signup
+    permissions:
+      - role: anonymous
+      - role: user
+  - name: uploadImage
+    definition:
+      kind: synchronous
+      handler: http://localhost:8082/upload
+    permissions:
+      - role: user
+  - name: verifyEmail
+    definition:
+      kind: synchronous
+      handler: http://localhost:8082/auth/verifyemail
+    permissions:
+      - role: anonymous
 custom_types:
-    enums: []
-    input_objects: []
-    objects: []
-    scalars: []
+  enums: []
+  input_objects:
+    - name: SampleInput
+    - name: VerifayEmailInput
+    - name: VerifyEmailInput
+    - name: SignupInput
+    - name: SignInInput
+    - name: ImageUploadInput
+  objects:
+    - name: SampleOutput
+    - name: VerifayEmailOutput
+    - name: VerifyEmailOutput
+    - name: SignupOutput
+    - name: SignInOutput
+    - name: DataIncomeing
+    - name: ImageUploadOutput
+    - name: ImageInfo
+  scalars: []

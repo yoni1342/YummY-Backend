@@ -1,0 +1,39 @@
+table:
+  name: ingredients
+  schema: public
+array_relationships:
+  - name: recipe_ingredients
+    using:
+      foreign_key_constraint_on:
+        column: ingredient_id
+        table:
+          name: recipe_ingredients
+          schema: public
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+        - name
+        - picture
+        - ingredient_id
+    comment: ""
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - name
+        - picture
+        - ingredient_id
+      filter: {}
+      allow_aggregations: true
+    comment: ""
+  - role: user
+    permission:
+      columns:
+        - name
+        - picture
+        - ingredient_id
+      filter: {}
+      allow_aggregations: true
+    comment: ""

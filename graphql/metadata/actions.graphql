@@ -1,0 +1,97 @@
+type Mutation {
+  signIn(
+    credential: SignInInput!
+  ): SignInOutput
+}
+
+type Mutation {
+  signup(
+    userData: SignupInput!
+  ): SignupOutput
+}
+
+type Mutation {
+  uploadImage(
+    arg1: [ImageUploadInput]!
+  ): ImageUploadOutput
+}
+
+type Mutation {
+  verifyEmail(
+    arg1: VerifyEmailInput!
+  ): VerifyEmailOutput
+}
+
+input SampleInput {
+  first_name: String!
+  last_name: String!
+  email: String!
+  password: String!
+}
+
+input VerifayEmailInput {
+  token: String!
+}
+
+input VerifyEmailInput {
+  token: String!
+}
+
+input SignupInput {
+  first_name: String!
+  last_name: String!
+  email: String!
+  password: String!
+}
+
+input SignInInput {
+  email: String!
+  password: String!
+}
+
+input ImageUploadInput {
+  base64: String!
+}
+
+type SampleOutput {
+  accessToken: String!
+}
+
+type VerifayEmailOutput {
+  accessToken: String!
+}
+
+type VerifyEmailOutput {
+  success: Boolean!
+  message: String!
+}
+
+type SignupOutput {
+  message: String!
+  success: String!
+}
+
+type SignInOutput {
+  message: String!
+  data: DataIncomeing!
+}
+
+type DataIncomeing {
+  id: String!
+  first_name: String!
+  last_name: String!
+  email: String!
+  about_me: String!
+  profile_picture: String!
+  accessToken: String!
+}
+
+type ImageUploadOutput {
+  urls: [String]!
+}
+
+type ImageInfo {
+  base64: String!
+  name: String!
+}
+

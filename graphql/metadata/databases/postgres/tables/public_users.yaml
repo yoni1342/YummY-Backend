@@ -1,0 +1,51 @@
+table:
+  name: users
+  schema: public
+array_relationships:
+  - name: recipes
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          name: recipes
+          schema: public
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - about_me
+        - email
+        - first_name
+        - id
+        - is_verified
+        - last_name
+        - profile_picture
+      filter: {}
+    comment: ""
+  - role: user
+    permission:
+      columns:
+        - about_me
+        - email
+        - first_name
+        - id
+        - is_verified
+        - last_name
+        - profile_picture
+      filter: {}
+    comment: ""
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - about_me
+        - email
+        - first_name
+        - last_name
+        - password
+        - profile_picture
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+      check: null
+    comment: ""

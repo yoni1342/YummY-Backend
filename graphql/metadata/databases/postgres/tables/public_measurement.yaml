@@ -1,0 +1,18 @@
+table:
+  name: measurement
+  schema: public
+is_enum: true
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - unit_name
+      filter: {}
+    comment: ""
+  - role: user
+    permission:
+      columns:
+        - unit_name
+      filter: {}
+      allow_aggregations: true
+    comment: ""
